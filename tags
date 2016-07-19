@@ -1,0 +1,61 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+<<	path.rb	/^  def << array$/;"	f	class:Path
+==	maze.rb	/^    def ==(other)$/;"	f	class:Square
+==	maze.rb	/^  def ==(other)$/;"	f	class:Maze
+==	path.rb	/^  def ==(other)$/;"	f	class:Path
+Book	library_project/book.rb	/^class Book$/;"	c
+Maze	maze.rb	/^class Maze$/;"	c
+Path	path.rb	/^class Path$/;"	c
+Solver	solver.rb	/^class Solver$/;"	c
+Square	maze.rb	/^  class Square$/;"	c
+[]	maze.rb	/^  def [](x, y)$/;"	f	class:Maze
+collapse	path.rb	/^  def collapse(pos)$/;"	f	class:Path
+each	path.rb	/^  def each$/;"	f	class:Path
+empty?	maze.rb	/^    def empty?$/;"	f	class:Square
+find_pos	maze.rb	/^  def find_pos(type)$/;"	f
+finish?	maze.rb	/^    def finish?$/;"	f	class:Square
+impossible?	solver.rb	/^  def impossible?$/;"	f
+initialize	library_project/book.rb	/^  def initialize(title, author, category)$/;"	f	class:Book
+initialize	maze.rb	/^    def initialize(content)$/;"	f	class:Square
+initialize	maze.rb	/^  def initialize(grid = nil)$/;"	f	class:Maze
+initialize	path.rb	/^  def initialize(positions = nil)$/;"	f	class:Path
+initialize	solver.rb	/^  def initialize(maze)$/;"	f	class:Solver
+mark	maze.rb	/^    def mark$/;"	f	class:Square
+marked?	maze.rb	/^    def marked?$/;"	f	class:Square
+move	solver.rb	/^  def move(dir)$/;"	f
+move_forward	solver.rb	/^  def move_forward$/;"	f
+new_square	spec/solver_spec.rb	/^def new_square(content)$/;"	f
+oriented?	solver.rb	/^  def oriented?$/;"	f
+out_of_bounds?	maze.rb	/^  def out_of_bounds?(pos)$/;"	f	class:Maze
+over?	solver.rb	/^  def over?$/;"	f
+positions	maze.rb	/^  def positions$/;"	f
+print	maze.rb	/^    def print$/;"	f	class:Square
+print	maze.rb	/^  def print(path)$/;"	f	class:Maze
+print	solver.rb	/^  def print$/;"	f
+print_row	maze.rb	/^  def print_row(row)$/;"	f	class:Maze
+read_file	maze.rb	/^  def read_file(file)$/;"	f
+read_text	maze.rb	/^  def read_text(file)$/;"	f	class:Maze
+redundant?	path.rb	/^  def redundant?(pos)$/;"	f	class:Path
+remove_redundancies	path.rb	/^  def remove_redundancies$/;"	f	class:Path
+rotate_right	solver.rb	/^  def rotate_right(dir)$/;"	f
+solve	solver.rb	/^  def solve$/;"	f	class:Solver
+start	maze.rb	/^  def start$/;"	f	class:Maze
+start?	maze.rb	/^    def start?$/;"	f	class:Square
+step	solver.rb	/^  def step$/;"	f
+text_to_grid	maze.rb	/^  def text_to_grid(text)$/;"	f	class:Maze
+to_my	solver.rb	/^  def to_my(dir)$/;"	f
+to_s	maze.rb	/^    def to_s$/;"	f	class:Square
+to_s	maze.rb	/^  def to_s$/;"	f	class:Maze
+to_s	path.rb	/^  def to_s$/;"	f	class:Path
+to_the	solver.rb	/^  def to_the(dir)$/;"	f
+turn_right	solver.rb	/^  def turn_right$/;"	f
+unmark	maze.rb	/^    def unmark$/;"	f	class:Square
+wall?	maze.rb	/^    def wall?$/;"	f	class:Square
+won?	solver.rb	/^  def won?$/;"	f
+x_bound	maze.rb	/^  def x_bound$/;"	f	class:Maze
+y_bound	maze.rb	/^  def y_bound$/;"	f	class:Maze
