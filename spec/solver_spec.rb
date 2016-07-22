@@ -13,14 +13,17 @@ describe Solver do
     s = new_square('S')
     w = new_square('*')
     e = new_square(' ')
-    @empty_grid = [[new_square(' ')]]
-    @small_grid = [[w,w,w,w],
+    small_grid = [[w,w,w,w],
                    [w,e,f,w],
                    [w,s,e,w],
                    [w,w,w,w]]
-    @small_maze = Maze.new(@small_grid)
-    @solver = Solver.new(@small_maze)
+    small_maze = Maze.new(small_grid)
+    @solver = Solver.new(small_maze)
     @solved_path = Path.new([[1,2], [2,2], [2,1]])
+
+    line_grid = [[f,e,s]]
+    line_maze = Maze.new(line_grid)
+    @line_solver = Solver.new(line_maze)
   end
 
   describe "#new" do
@@ -34,9 +37,14 @@ describe Solver do
       @solver.solve
       expect(@solver.path).to eq(@solved_path)
     end
+
+    # it "#solves a maze with blank edges" do
+    #   @line_solver.solve
+    #   expect(@line_solver.path).to eq(@line_path)
+    # end
   end
 end
 
 def new_square(content)
-  Maze::Square.new(content)
+  Square.new(content)
 end

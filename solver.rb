@@ -43,8 +43,8 @@ class Solver
     else
       turn_right
     end
-    print
-    sleep(0.5)
+    # print
+    # sleep(0.5)
   end
 
   def turn_right
@@ -70,7 +70,7 @@ class Solver
   def to_the(dir)
     pos = move(dir)
     if maze.out_of_bounds?(pos)
-      Maze::Square.new('*')
+      Square.new('*')
     else
       maze[*move(dir)]
     end

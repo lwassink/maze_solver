@@ -7,6 +7,7 @@
 
 
 require_relative 'path'
+require_relative 'square'
 
 class Maze
   attr_reader :grid
@@ -90,56 +91,6 @@ class Maze
 
   def each
     grid.flatten.each { |square| yield(square) }
-  end
-
-  class Square
-    attr_reader :content
-
-    def initialize(content)
-      @content = content
-      @marked = false
-    end
-
-    def mark
-      @marked = true
-      self
-    end
-
-    def unmark
-      @mark = false
-    end
-
-    def wall?
-      content == '*'
-    end
-
-    def start?
-      content == 'S'
-    end
-
-    def finish?
-      content == 'E'
-    end
-
-    def empty?
-      !self.wall?
-    end
-
-    def marked?
-      @marked
-    end
-
-    def ==(other)
-      content == other.content
-    end
-
-    def to_s
-      content
-    end
-
-    def print
-      marked? ? 'X' : self.to_s
-    end
   end
 end
 

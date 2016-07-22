@@ -14,12 +14,13 @@ class Path
     @positions = positions || []
   end
 
-  def << array
+  def <<(array)
     @positions << array
   end
 
   def remove_redundancies
     each { |pos| collapse(pos) if redundant?(pos) }
+    self
   end
 
   def ==(other)

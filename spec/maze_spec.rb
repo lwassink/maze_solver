@@ -10,12 +10,12 @@ require 'spec_helper'
 RSpec.describe Maze do
   before :each do
     @empty_maze = Maze.new
-    f = Maze::Square.new('E')
-    s = Maze::Square.new('S')
-    w = Maze::Square.new('*')
-    e = Maze::Square.new(' ')
-    m = Maze::Square.new(' ').mark
-    @empty_grid = [[Maze::Square.new(' ')]]
+    f = Square.new('E')
+    s = Square.new('S')
+    w = Square.new('*')
+    e = Square.new(' ')
+    m = Square.new(' ').mark
+    @empty_grid = [[Square.new(' ')]]
     @small_grid = [[w,w,w,w],
                    [w,e,f,w],
                    [w,s,e,w],
@@ -111,93 +111,6 @@ RSpec.describe Maze do
     it "resets the marks on a marked maze" do
       @marked_maze.reset_marks
       expect(@marked_maze.print).to eq(" X")
-    end
-  end
-end
-
-RSpec.describe Maze::Square do
-  before :each do
-    @wall = Maze::Square.new('*')
-    @empty_space = Maze::Square.new(' ')
-    @start = Maze::Square.new('S')
-    @finish = Maze::Square.new('E')
-    @squares = [@wall, @empty_space, @start, @finish]
-  end
-
-  describe "#new" do
-    it "is a Maze::Square" do
-      @squares.each do |square|
-        expect(square).to be_an_instance_of(Maze::Square)
-      end
-    end
-  end
-
-  describe "#wall?" do
-    it "recognizes walls" do
-      expect(@wall.wall?).to be true
-
-      (@squares - [@wall]).each do |square|
-        expect(square.wall?).to be false
-      end
-    end
-  end
-
-  describe "#start?" do
-    it "recognizes the start" do
-      expect(@start.start?).to be true
-
-      (@squares - [@start]).each do |square|
-        expect(square.start?).to be false
-      end
-    end
-  end
-
-  describe "#finish?" do
-    it "recognizes the finish" do
-      expect(@finish.finish?).to be true
-
-      (@squares - [@finish]).each do |square|
-        expect(square.finish?).to be false
-      end
-    end
-  end
-
-  describe "#empty?" do
-    it "recognizes empty spaces" do
-      expect(@wall.empty?).to be false
-
-      (@squares - [@wall]).each do |square|
-        expect(square.empty?).to be true
-      end
-    end
-  end
-
-  describe "#to_s" do
-    it "turns an empty square into a string" do
-      expect(@empty_space.to_s).to eq(' ')
-    end
-
-    it "turns a wall square into a string" do
-      expect(@wall.to_s).to eq('*')
-    end
-
-    it "turns a start square into a string" do
-      expect(@start.to_s).to eq('S')
-    end
-
-    it "turns an end square into a string" do
-      expect(@finish.to_s).to eq('E')
-    end
-  end
-
-  describe "#print" do
-    it "prints ' ' for a blank square" do
-      expect(@empty_space.print).to eq(' ')
-    end
-
-    it "prints 'X' for a marked square" do
-      @empty_space.mark
-      expect(@empty_space.print).to eq('X')
     end
   end
 end
