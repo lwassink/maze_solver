@@ -45,5 +45,23 @@ describe Position do
       expect(@pos.left).to eq(@pos_left)
     end
   end
+
+  describe "#==" do
+    it "checks of two positions are equal" do
+      expect(@pos).to eq(Position.new(1,1))
+    end
+  end
+
+  describe "#move" do
+    it "moves up" do
+      up = Direction.new(:up)
+      expect(@pos.move(up)).to eq(@pos_up)
+    end
+
+    it "moves left" do
+      left = Direction.new(:left)
+      expect(@pos.move(left)).to eq(@pos_left)
+    end
+  end
 end
 

@@ -8,6 +8,7 @@
 
 require_relative 'path'
 require_relative 'square'
+require_relative 'position'
 
 class Maze
   attr_reader :grid
@@ -17,7 +18,11 @@ class Maze
   end
 
   def [](x, y)
-    grid[y][x]
+    square(Position.new(x, y))
+  end
+
+  def square(pos)
+    grid[pos.y][pos.x]
   end
 
   def start
@@ -53,7 +58,7 @@ class Maze
   end
 
   def out_of_bounds?(pos)
-    x, y = pos
+    x, y = pos.x, pos.y
     x < 0 || x_bound <= x || y < 0 || y_bound <= y
   end
 
@@ -83,7 +88,7 @@ class Maze
 
   def find_pos(type)
     grid.each_with_index do |row, y|
-      row.each_with_index { |square, x| return [x, y] if square.send(type) }
+      row.each_with_index { |square, x| return Position.new(x, y) if square.send(type) }
     end
 
     raise "A position of type #{type} could not be found"

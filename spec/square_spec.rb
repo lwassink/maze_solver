@@ -88,8 +88,8 @@ RSpec.describe Square do
     end
 
     it "prints 'X' for a marked square" do
-      @empty_space.mark
-      expect(@empty_space.print).to eq('X')
+      marked_space = @empty_space.mark
+      expect(marked_space.print).to eq('X')
     end
   end
 end

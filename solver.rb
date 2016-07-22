@@ -8,6 +8,7 @@
 
 require_relative 'maze'
 require_relative 'path'
+require_relative 'direction'
 
 class Solver
   attr_reader :maze
@@ -15,13 +16,11 @@ class Solver
   attr_reader :facing
   attr_reader :current_position
 
-  @@directions = [:up, :right, :down, :left]
-
   def initialize(maze)
     @maze = maze
     @current_position = maze.start
     @path = Path.new([current_position])
-    @facing = :up
+    @facing = Direction.new(:up)
   end
 
   def solve
@@ -39,32 +38,24 @@ class Solver
 
   def step
     if oriented?
-      move_forward
+      move_forward!
     else
-      turn_right
+      turn_right!
     end
     # print
     # sleep(0.5)
   end
 
-  def turn_right
-    @facing = rotate_right(facing)
-  end
-
-  def rotate_right(dir)
-    current_index = @@directions.index(dir)
-    new_index = (current_index + 1) % 4
-    @@directions[new_index]
+  def turn_right!
+    @facing.turn_right!
   end
 
   def oriented?
-    to_my(:right).wall? && to_my(:up).empty?
+    to_my(:right).wall? && to_my(:front).empty?
   end
 
   def to_my(dir)
-    rotation = @@directions.index(facing)
-    rotation.times { dir = rotate_right(dir) }
-    to_the(dir)
+    to_the(facing.turn(dir))
   end
 
   def to_the(dir)
@@ -72,31 +63,21 @@ class Solver
     if maze.out_of_bounds?(pos)
       Square.new('*')
     else
-      maze[*move(dir)]
+      maze.square(move(dir))
     end
   end
 
   def move(dir)
-    x, y = current_position
-    case dir
-    when :up
-      [x, y-1]
-    when :right
-      [x+1, y]
-    when :down
-      [x, y+1]
-    when :left
-      [x-1, y]
-    end
+    current_position.move(dir)
   end
 
-  def move_forward
+  def move_forward!
     @current_position = move(facing)
-    @path << @current_position
+    @path << current_position
   end
 
   def mark(pos)
-    maze[*pos].mark
+    maze.square(pos).mark
   end
 
   def mark_from_path
@@ -108,12 +89,13 @@ class Solver
   end
 
   def won?
-    maze[*current_position].finish?
+    maze.square(current_position).finish?
   end
 
   def impossible?
     false
   end
+
 end
 
 if __FILE__ == $PROGRAM_NAME

@@ -19,7 +19,7 @@ describe Solver do
                    [w,w,w,w]]
     small_maze = Maze.new(small_grid)
     @solver = Solver.new(small_maze)
-    @solved_path = Path.new([[1,2], [2,2], [2,1]])
+    @solved_path = Path.new([[1,2], [1,1], [2,1]])
 
     line_grid = [[f,e,s]]
     line_maze = Maze.new(line_grid)

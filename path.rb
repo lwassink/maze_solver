@@ -5,22 +5,23 @@
 # Distributed under terms of the MIT license.
 #
 
+require_relative 'position'
 
 class Path
   include Enumerable
   attr_reader :positions
 
   def initialize(positions = nil)
-    @positions = positions || []
+    @positions = to_positions(positions)
   end
 
-  def <<(array)
-    @positions << array
+  def <<(pos)
+    @positions << pos
   end
 
   def remove_redundancies
-    each { |pos| collapse(pos) if redundant?(pos) }
-    self
+    new = self.dup
+    new.remove_redundancies!
   end
 
   def ==(other)
@@ -38,6 +39,11 @@ class Path
 
   private
 
+  def to_positions(list)
+    return [] unless list
+    list.map { |el| el.is_a?(Position) ? el : Position.new(*el) }
+  end
+
   def redundant?(pos)
     positions.count(pos) > 1
   end
@@ -47,6 +53,13 @@ class Path
     first = occurrences.first[1]
     last = occurrences.last[1]
     @positions = @positions[0...first] + @positions[last..-1]
+  end
+
+  protected
+
+  def remove_redundancies!
+    each { |pos| collapse(pos) if redundant?(pos) }
+    self
   end
 end
 

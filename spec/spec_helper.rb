@@ -11,4 +11,5 @@ require_relative '../path'
 require_relative '../solver'
 require_relative '../position'
 require_relative '../square'
+require_relative '../direction'
 

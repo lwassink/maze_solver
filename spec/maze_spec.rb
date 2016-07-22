@@ -81,7 +81,7 @@ RSpec.describe Maze do
 
   describe "#start" do
     it "returns the starting position of a maze that has one" do
-      expect(@small_maze.start).to eq([1,2])
+      expect(@small_maze.start).to eq(Position.new(1,2))
     end
 
     it "raises an error if there is no start" do

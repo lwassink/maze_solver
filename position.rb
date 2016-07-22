@@ -6,6 +6,8 @@
 #
 
 
+require_relative 'direction'
+
 class Position
   attr_reader :x
   attr_reader :y
@@ -35,9 +37,17 @@ class Position
     new.left!
   end
 
+  def move(direction)
+    direction = direction.dir
+    if [:up, :down, :right, :left].include? direction
+      self.send(direction)
+    else
+      raise "Not a valid direction"
+    end
+  end
+
   def ==(other)
-    @x == other.x
-    @y == other.y
+    @x == other.x && @y == other.y
   end
 
   protected
