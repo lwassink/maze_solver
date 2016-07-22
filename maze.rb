@@ -62,8 +62,8 @@ class Maze
     x < 0 || x_bound <= x || y < 0 || y_bound <= y
   end
 
-  def reset_marks
-    each { |square| square.unmark }
+  def reset_marks!
+    each { |square| puts square.print; square.unmark! }
   end
 
   private

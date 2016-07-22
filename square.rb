@@ -56,15 +56,13 @@ class Square
     marked? ? 'X' : self.to_s
   end
 
-  protected
-
   def mark!
     @marked = true
     self
   end
 
   def unmark!
-    @mark = false
+    @marked = false
     self
   end
 end

@@ -30,7 +30,7 @@ class Solver
   end
 
   def print
-    mark_from_path
+    mark_from_path!
     puts maze.print
   end
 
@@ -42,8 +42,8 @@ class Solver
     else
       turn_right!
     end
-    # print
-    # sleep(0.5)
+    print
+    sleep(0.5)
   end
 
   def turn_right!
@@ -76,12 +76,12 @@ class Solver
     @path << current_position
   end
 
-  def mark(pos)
+  def mark!(pos)
     maze.square(pos).mark
   end
 
-  def mark_from_path
-    path.each { |pos| mark(pos) }
+  def mark_from_path!
+    path.each { |pos| maze.square(pos).mark! }
   end
 
   def over?

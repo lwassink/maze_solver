@@ -107,10 +107,10 @@ RSpec.describe Maze do
     end
   end
 
-  describe "#reset" do
+  describe "#reset_marks" do
     it "resets the marks on a marked maze" do
-      @marked_maze.reset_marks
-      expect(@marked_maze.print).to eq(" X")
+      @marked_maze.reset_marks!
+      expect(@marked_maze.print).to eq("  ")
     end
   end
 end

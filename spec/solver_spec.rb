@@ -38,10 +38,10 @@ describe Solver do
       expect(@solver.path).to eq(@solved_path)
     end
 
-    # it "#solves a maze with blank edges" do
-    #   @line_solver.solve
-    #   expect(@line_solver.path).to eq(@line_path)
-    # end
+    it "#solves a maze with blank edges" do
+      @line_solver.solve
+      expect(@line_solver.path).to eq(@line_path)
+    end
   end
 end
 
