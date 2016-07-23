@@ -24,6 +24,11 @@ class Path
     new.remove_redundancies!
   end
 
+  def reverse!
+    @positions.reverse!
+    self
+  end
+
   def ==(other)
     positions == other.positions
   end

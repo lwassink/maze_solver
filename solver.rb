@@ -12,120 +12,116 @@ require_relative 'direction'
 
 class Solver
   attr_reader :maze
+  attr_reader :exploration_history
+  attr_reader :finish
   attr_reader :path
-  attr_reader :facing
-  attr_reader :current_position
 
   def initialize(maze)
     @maze = maze
-    @current_position = maze.start
-    @path = Path.new([current_position])
-    @facing = Direction.new(:up)
-    @sleep_time = 0#.5
+    @exploration_history = [Explorer.new(maze.start, nil)]
+    @end_not_found = true
+    @finish = nil
+    @path = Path.new
   end
 
-  def solve
-    print
-    sleep(@sleep_time)
-    orient!
-    print
-    sleep(@sleep_time)
-    until over?
-      step!
-      print
-      sleep(@sleep_time)
-    end
+  def solve!
+    explore(maze.start)
+    generate_path
+    conclude
+    puts path
   end
 
   def print
-    mark_from_path!
-
     puts
-    puts "Facing: #{facing}\tPosition: #{current_position}"
-    puts "In front: #{to_my(:front)},\t On the right: #{to_my(:right)}"
+    puts "Exploration history: #{exploration_history}"
+    puts "Explored square: #{explored_squares}"
     puts maze.print
     puts
   end
 
   private
 
-  def step!
-    if to_my(:front).empty? && to_my(:right).wall?
-      move_forward!
-    elsif to_my(:right).empty?
-      turn_right!
-      move_forward!
-    else
-      turn_left!
+  def explore(pos)
+    proccess(pos)
+
+    if maze.square(pos).finish?
+      set_end(pos)
+    end
+
+    directions.each do |dir|
+      new_pos = pos.move(dir)
+      if explorable?(new_pos)
+        update_history(Explorer.new(new_pos, pos))
+        explore(new_pos)
+      end
     end
   end
 
-  def orient!
-    until to_my(:front).empty? && to_my(:right).wall?
-      turn_right!
-      print
-      sleep(2 * @sleep_time)
+  def proccess(pos)
+    mark!(pos)
+  end
+
+  def directions
+    [:up, :right, :down, :left]
+  end
+
+  def set_end(pos)
+    @finish = false
+    @finish = pos
+  end
+
+  def explorable?(pos)
+    maze.square(pos).empty? &&
+      !explored_squares.include?(pos) &&
+      @end_not_found
+  end
+
+  def explored_squares
+    exploration_history.map(&:pos)
+  end
+
+  def update_history(explorer)
+    @exploration_history << explorer
+  end
+
+  def generate_path
+    pos = finish
+
+    while pos
+      @path << pos
+      pos = parrent(pos)
     end
+    @path.reverse!
   end
 
-  def turn_right!
-    facing.turn_right!
+  def parrent(pos)
+    index = exploration_history.index { |explorer| explorer.pos == pos }
+    return nil unless index
+    exploration_history[index].parrent
   end
 
-  def turn_left!
-    facing.turn_left!
+  def conclude
+    maze.reset_marks!
+    mark_path!
+    print
   end
 
-  def to_my(rel_dir)
-    # puts "To my #{rel_dir} is #{facing.turn(rel_dir)}"
-    to_the(facing.turn(rel_dir))
-  end
-
-  def to_the(dir)
-    pos = move(dir)
-    if maze.out_of_bounds?(pos)
-      Square.new('*')
-    else
-      maze.square(pos)
-    end
-  end
-
-  def move(dir)
-    current_position.move(dir)
-  end
-
-  def move_forward!
-    @current_position = move(facing)
-    @path << current_position
+  def mark_path!
+    path.each { |pos| mark!(pos) }
   end
 
   def mark!(pos)
-    maze.square(pos).mark
+    maze.square(pos).mark!
   end
 
-  def mark_from_path!
-    path.each { |pos| maze.square(pos).mark! }
-  end
-
-  def over?
-    won? || impossible?
-  end
-
-  def won?
-    maze.square(current_position).finish?
-  end
-
-  def impossible?
-    false
-  end
-
+  Explorer = Struct.new(:pos, :parrent)
 end
 
 if __FILE__ == $PROGRAM_NAME
   maze = Maze.new
   maze.read_text('aA_maze.txt')
   solver = Solver.new(maze)
-  solver.solve
+  solver.solve!
   solver.print
 end
 

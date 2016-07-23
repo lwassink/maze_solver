@@ -134,5 +134,24 @@ RSpec.describe Maze do
       expect(@small_maze.out_of_bounds?(Position.new(4,1))).to be_truthy
     end
   end
+
+  describe "#validate" do
+    s = Square.new('S')
+    e = Square.new(' ')
+    d = Square.new('d')
+    extra_character = Maze.new([[d]])
+    two_starts = Maze.new([[s, s, e]])
+    no_end = Maze.new([[s]])
+
+    it "validates a small maze" do
+      expect { @small_maze.validate }.not_to raise_error
+    end
+
+    it "validates a small maze" do
+      expect { extra_character.validate }.to raise_error(MazeError)
+      expect { two_starts.validate }.to raise_error(MazeError)
+      expect { no_end.validate }.to raise_error(MazeError)
+    end
+  end
 end
 

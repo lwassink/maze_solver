@@ -22,6 +22,7 @@ class Maze
   end
 
   def square(pos)
+    return Square.new('*') if out_of_bounds?(pos)
     grid[pos.y][pos.x]
   end
 
@@ -63,7 +64,18 @@ class Maze
   end
 
   def reset_marks!
-    each { |square| puts square.print; square.unmark! }
+    each { |square| square.unmark! }
+  end
+
+  def validate
+    contents = grid.flatten.map(&:content)
+    unless (contents - ['E', ' ', '*', 'S']).empty?
+      raise MazeError, "Invalid maze characters."
+    end
+
+    unless contents.count('E') == 1 and contents.count('S') == 1
+      raise MazeError, "There must be exactly one start and end square."
+    end
   end
 
   private
@@ -98,4 +110,6 @@ class Maze
     grid.flatten.each { |square| yield(square) }
   end
 end
+
+class MazeError < StandardError; end
 

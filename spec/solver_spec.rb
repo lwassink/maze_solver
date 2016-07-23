@@ -19,12 +19,10 @@ describe Solver do
                    [w,w,w,w]]
     small_maze = Maze.new(small_grid)
     @solver = Solver.new(small_maze)
-    @solved_path = Path.new([[1,2], [2,2], [2,1]])
 
     line_grid = [[f,e.dup,s]]
     line_maze = Maze.new(line_grid)
     @line_solver = Solver.new(line_maze)
-    @line_path = Path.new([[2,0], [1,0], [0,0]])
   end
 
   describe "#new" do
@@ -35,13 +33,13 @@ describe Solver do
 
   describe "#solve" do
     it "solves a small maze" do
-      @solver.solve
-      expect(@solver.path).to eq(@solved_path)
+      @solver.solve!
+      expect(@solver.finish).to eq(Position.new(2,1))
     end
 
     it "#solves a maze with blank edges" do
-      @line_solver.solve
-      expect(@line_solver.path).to eq(@line_path)
+      @line_solver.solve!
+      expect(@line_solver.finish).to eq(Position.new(0,0))
     end
   end
 end

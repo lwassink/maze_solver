@@ -34,6 +34,10 @@ class Position
     "[#{x}, #{y}]"
   end
 
+  def inspect
+    to_s
+  end
+
   protected
 
   def up!
