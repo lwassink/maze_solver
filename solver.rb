@@ -50,9 +50,9 @@ class Solver
   private
 
   def step!
-    if front_empty? && wall_on_right?
+    if to_my(:front).empty? && to_my(:right).wall?
       move_forward!
-    elsif right_empty?
+    elsif to_my(:right).empty?
       turn_right!
       move_forward!
     else
@@ -61,7 +61,7 @@ class Solver
   end
 
   def orient!
-    until front_empty? && wall_on_right?
+    until to_my(:front).empty? && to_my(:right).wall?
       turn_right!
       print
       sleep(2 * @sleep_time)
@@ -74,18 +74,6 @@ class Solver
 
   def turn_left!
     facing.turn_left!
-  end
-
-  def front_empty?
-    to_my(:front).empty?
-  end
-
-  def wall_on_right?
-    to_my(:right).wall?
-  end
-
-  def right_empty?
-    to_my(:right).empty?
   end
 
   def to_my(rel_dir)
