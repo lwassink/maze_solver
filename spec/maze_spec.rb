@@ -139,18 +139,21 @@ RSpec.describe Maze do
     s = Square.new('S')
     e = Square.new(' ')
     d = Square.new('d')
+    f = Square.new('E')
     extra_character = Maze.new([[d]])
-    two_starts = Maze.new([[s, s, e]])
+    two_starts = Maze.new([[s, s, f]])
     no_end = Maze.new([[s]])
+    uneven_rows = Maze.new([[s], [e, f]])
 
     it "validates a small maze" do
       expect { @small_maze.validate }.not_to raise_error
     end
 
-    it "validates a small maze" do
+    it "raises an error for improper mazes" do
       expect { extra_character.validate }.to raise_error(MazeError)
       expect { two_starts.validate }.to raise_error(MazeError)
       expect { no_end.validate }.to raise_error(MazeError)
+      expect { uneven_rows.validate }.to raise_error(MazeError)
     end
   end
 end

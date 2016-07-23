@@ -68,14 +68,9 @@ class Maze
   end
 
   def validate
-    contents = grid.flatten.map(&:content)
-    unless (contents - ['E', ' ', '*', 'S']).empty?
-      raise MazeError, "Invalid maze characters."
-    end
-
-    unless contents.count('E') == 1 and contents.count('S') == 1
-      raise MazeError, "There must be exactly one start and end square."
-    end
+    validate_characters
+    validate_start_and_end
+    validate_rows
   end
 
   private
@@ -108,6 +103,26 @@ class Maze
 
   def each
     grid.flatten.each { |square| yield(square) }
+  end
+
+  def validate_characters
+    contents = grid.flatten.map(&:content)
+    unless (contents - ['E', ' ', '*', 'S']).empty?
+      raise MazeError, "Invalid maze characters."
+    end
+  end
+
+  def validate_start_and_end
+    contents = grid.flatten.map(&:content)
+    unless contents.count('E') == 1 and contents.count('S') == 1
+      raise MazeError, "There must be exactly one start and end square."
+    end
+  end
+
+  def validate_rows
+    unless grid.all? { |row| row.length == x_bound }
+      raise MazeError, "Each row in a maze must have the same length"
+    end
   end
 end
 
