@@ -21,41 +21,76 @@ class Solver
     @current_position = maze.start
     @path = Path.new([current_position])
     @facing = Direction.new(:up)
+    @sleep_time = 0#.5
   end
 
   def solve
+    print
+    sleep(@sleep_time)
+    orient!
+    print
+    sleep(@sleep_time)
     until over?
-      step
+      step!
+      print
+      sleep(@sleep_time)
     end
   end
 
   def print
     mark_from_path!
+
+    puts
+    puts "Facing: #{facing}\tPosition: #{current_position}"
+    puts "In front: #{to_my(:front)},\t On the right: #{to_my(:right)}"
     puts maze.print
+    puts
   end
 
   private
 
-  def step
-    if oriented?
+  def step!
+    if front_empty? && wall_on_right?
+      move_forward!
+    elsif right_empty?
+      turn_right!
       move_forward!
     else
-      turn_right!
+      turn_left!
     end
-    print
-    sleep(0.5)
+  end
+
+  def orient!
+    until front_empty? && wall_on_right?
+      turn_right!
+      print
+      sleep(2 * @sleep_time)
+    end
   end
 
   def turn_right!
-    @facing.turn_right!
+    facing.turn_right!
   end
 
-  def oriented?
-    to_my(:right).wall? && to_my(:front).empty?
+  def turn_left!
+    facing.turn_left!
   end
 
-  def to_my(dir)
-    to_the(facing.turn(dir))
+  def front_empty?
+    to_my(:front).empty?
+  end
+
+  def wall_on_right?
+    to_my(:right).wall?
+  end
+
+  def right_empty?
+    to_my(:right).empty?
+  end
+
+  def to_my(rel_dir)
+    # puts "To my #{rel_dir} is #{facing.turn(rel_dir)}"
+    to_the(facing.turn(rel_dir))
   end
 
   def to_the(dir)
@@ -63,7 +98,7 @@ class Solver
     if maze.out_of_bounds?(pos)
       Square.new('*')
     else
-      maze.square(move(dir))
+      maze.square(pos)
     end
   end
 

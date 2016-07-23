@@ -38,11 +38,11 @@ class Maze
   end
 
   def x_bound
-    grid.length
+    grid[0].length
   end
 
   def y_bound
-    grid[0].length
+    grid.length
   end
 
   def to_s

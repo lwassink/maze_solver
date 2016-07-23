@@ -17,6 +17,47 @@ class Position
     @y = y
   end
 
+  def move(direction)
+    direction = direction.to_sym
+    if [:up, :down, :right, :left].include? direction
+      self.send(direction)
+    else
+      raise "Not a valid direction"
+    end
+  end
+
+  def ==(other)
+    @x == other.x && @y == other.y
+  end
+
+  def to_s
+    "[#{x}, #{y}]"
+  end
+
+  protected
+
+  def up!
+    @y -= 1
+    self
+  end
+
+  def down!
+    @y += 1
+    self
+  end
+
+  def right!
+    @x += 1
+    self
+  end
+
+  def left!
+    @x -= 1
+    self
+  end
+
+  private
+
   def up
     new = self.dup
     new.up!
@@ -37,39 +78,5 @@ class Position
     new.left!
   end
 
-  def move(direction)
-    direction = direction.dir
-    if [:up, :down, :right, :left].include? direction
-      self.send(direction)
-    else
-      raise "Not a valid direction"
-    end
-  end
-
-  def ==(other)
-    @x == other.x && @y == other.y
-  end
-
-  protected
-
-  def up!
-    @y += 1
-    self
-  end
-
-  def down!
-    @y -= 1
-    self
-  end
-
-  def right!
-    @x += 1
-    self
-  end
-
-  def left!
-    @x -= 1
-    self
-  end
 end
 

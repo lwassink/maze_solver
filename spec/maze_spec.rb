@@ -15,14 +15,20 @@ RSpec.describe Maze do
     w = Square.new('*')
     e = Square.new(' ')
     m = Square.new(' ').mark
+
     @empty_grid = [[Square.new(' ')]]
+
     @small_grid = [[w,w,w,w],
                    [w,e,f,w],
-                   [w,s,e,w],
+                   [w,s,e.dup,w],
                    [w,w,w,w]]
     @small_maze = Maze.new(@small_grid)
     @small_maze_text = "****\n* E*\n*S *\n****"
+
     @marked_maze = Maze.new([[e, m]])
+
+    line_grid = [[e,e]]
+    @line_maze = Maze.new(line_grid)
   end
 
   describe "#new" do
@@ -91,13 +97,13 @@ RSpec.describe Maze do
 
   describe "#xbound" do
     it "returns the length of a row in a maze" do
-      expect(@small_maze.x_bound).to eq(4)
+      expect(@line_maze.x_bound).to eq(2)
     end
   end
 
   describe "#ybound" do
     it "returns of length of a column in a maze" do
-      expect(@small_maze.y_bound).to eq(4)
+      expect(@line_maze.y_bound).to eq(1)
     end
   end
 
@@ -111,6 +117,21 @@ RSpec.describe Maze do
     it "resets the marks on a marked maze" do
       @marked_maze.reset_marks!
       expect(@marked_maze.print).to eq("  ")
+    end
+  end
+
+  describe "#out_of_bounds?" do
+    it "knows that [0,0], [1,1], and [3,3] are in bounds" do
+      expect(@small_maze.out_of_bounds?(Position.new(0,0))).to be_falsey
+      expect(@small_maze.out_of_bounds?(Position.new(1,1))).to be_falsey
+      expect(@small_maze.out_of_bounds?(Position.new(3,3))).to be_falsey
+    end
+
+    it "knows that [-1,1], [1,-1], [1,4], and [4,1] are out of bounds" do
+      expect(@small_maze.out_of_bounds?(Position.new(-1,1))).to be_truthy
+      expect(@small_maze.out_of_bounds?(Position.new(1,-1))).to be_truthy
+      expect(@small_maze.out_of_bounds?(Position.new(1,4))).to be_truthy
+      expect(@small_maze.out_of_bounds?(Position.new(4,1))).to be_truthy
     end
   end
 end

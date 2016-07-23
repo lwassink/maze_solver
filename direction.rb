@@ -8,6 +8,7 @@
 
 class Direction
   attr_reader :dir
+
   @@directions = [:up, :right, :down, :left]
 
   def initialize(dir)
@@ -16,6 +17,11 @@ class Direction
 
   def turn_right!
     @dir = turn(:right).dir
+    self
+  end
+
+  def turn_left!
+    @dir = turn(:left).dir
     self
   end
 
@@ -29,6 +35,14 @@ class Direction
 
   def ==(other)
     dir == other.dir
+  end
+
+  def to_s
+    dir.to_s
+  end
+
+  def to_sym
+    dir
   end
 end
 

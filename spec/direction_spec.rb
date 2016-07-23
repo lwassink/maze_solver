@@ -35,6 +35,16 @@ describe Direction do
     end
   end
 
+  describe "#turn_left!" do
+    it "turns from right to up" do
+      expect(@right.turn_left!).to eq(@up)
+    end
+
+    it "turns up right to left" do
+      expect(@up.turn_left!).to eq(@left)
+    end
+  end
+
   describe "#turn" do
     it "shows down is to the back of up" do
       expect(@up.turn(:back)).to eq(@down)
