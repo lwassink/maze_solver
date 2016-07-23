@@ -25,14 +25,19 @@ class Solver
   end
 
   def solve!
+    maze.validate
     explore!(maze.start)
     generate_path
   end
 
   def conclude(step_time = 0)
     @step_time = step_time
-    path.each { |pos| step!(pos) }
-    print_step if step_time == 0
+
+    if unsolved?
+      puts unsolvable
+    else
+      show_solution
+    end
   end
 
   private
@@ -49,6 +54,11 @@ class Solver
         explore!(new_pos)
       end
     end
+  end
+
+  def show_solution
+    path.each { |pos| step!(pos) }
+    print_step if step_time == 0
   end
 
   def step!(pos)
@@ -108,6 +118,14 @@ class Solver
     maze.square(pos).mark!
   end
 
+  def unsolved?
+    finish.nil?
+  end
+
+  def unsolvable
+    "This maze cannot be solved\n#{maze.print}"
+  end
+
   Explorer = Struct.new(:pos, :parrent)
 end
 
@@ -116,6 +134,6 @@ if __FILE__ == $PROGRAM_NAME
   maze.read_text('aA_maze.txt')
   solver = Solver.new(maze)
   solver.solve!
-  solver.conclude(0)
+  solver.conclude(0.5)
 end
 
