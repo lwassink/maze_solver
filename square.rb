@@ -53,7 +53,11 @@ class Square
   end
 
   def print
-    marked? ? 'X' : self.to_s
+    if marked? && !( start? || finish? )
+      'X'
+    else
+      to_s
+    end
   end
 
   def mark!

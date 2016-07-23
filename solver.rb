@@ -14,6 +14,7 @@ class Solver
   attr_reader :exploration_history
   attr_reader :finish
   attr_reader :path
+  attr_reader :step_time
 
   def initialize(maze)
     @maze = maze
@@ -24,25 +25,19 @@ class Solver
   end
 
   def solve!
-    explore(maze.start)
+    explore!(maze.start)
     generate_path
-    conclude
-    puts path
   end
 
-  def print
-    puts
-    puts "Exploration history: #{exploration_history}"
-    puts "Explored square: #{explored_squares}"
-    puts maze.print
-    puts
+  def conclude(step_time = 0)
+    @step_time = step_time
+    path.each { |pos| step!(pos) }
+    print_step if step_time == 0
   end
 
   private
 
-  def explore(pos)
-    proccess(pos)
-
+  def explore!(pos)
     if maze.square(pos).finish?
       set_end(pos)
     end
@@ -51,13 +46,23 @@ class Solver
       new_pos = pos.move(dir)
       if explorable?(new_pos)
         update_history(Explorer.new(new_pos, pos))
-        explore(new_pos)
+        explore!(new_pos)
       end
     end
   end
 
-  def proccess(pos)
+  def step!(pos)
     mark!(pos)
+    if step_time > 0
+      print_step
+      sleep(step_time)
+    end
+  end
+
+  def print_step
+    puts
+    puts maze.print
+    puts
   end
 
   def directions
@@ -99,16 +104,6 @@ class Solver
     exploration_history[index].parrent
   end
 
-  def conclude
-    maze.reset_marks!
-    mark_path!
-    print
-  end
-
-  def mark_path!
-    path.each { |pos| mark!(pos) }
-  end
-
   def mark!(pos)
     maze.square(pos).mark!
   end
@@ -121,6 +116,6 @@ if __FILE__ == $PROGRAM_NAME
   maze.read_text('aA_maze.txt')
   solver = Solver.new(maze)
   solver.solve!
-  solver.print
+  solver.conclude(0)
 end
 

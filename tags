@@ -5,80 +5,80 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 <<	path.rb	/^  def <<(pos)$/;"	f	class:Path
-==	direction.rb	/^  def ==(other)$/;"	f	class:Direction
 ==	maze.rb	/^  def ==(other)$/;"	f	class:Maze
 ==	path.rb	/^  def ==(other)$/;"	f	class:Path
 ==	position.rb	/^  def ==(other)$/;"	f	class:Position
 ==	square.rb	/^  def ==(other)$/;"	f	class:Square
-Direction	direction.rb	/^class Direction$/;"	c
 Maze	maze.rb	/^class Maze$/;"	c
+MazeError	maze.rb	/^class MazeError < StandardError; end$/;"	c
 Path	path.rb	/^class Path$/;"	c
 Position	position.rb	/^class Position$/;"	c
 Solver	solver.rb	/^class Solver$/;"	c
 Square	square.rb	/^class Square$/;"	c
 []	maze.rb	/^  def [](x, y)$/;"	f	class:Maze
 collapse	path.rb	/^  def collapse(pos)$/;"	f	class:Path
+conclude	solver.rb	/^  def conclude$/;"	f	class:Solver
+directions	solver.rb	/^  def directions$/;"	f	class:Solver
 down	position.rb	/^  def down$/;"	f	class:Position
 down!	position.rb	/^  def down!$/;"	f	class:Position
 each	maze.rb	/^  def each$/;"	f
 each	path.rb	/^  def each$/;"	f	class:Path
 empty?	square.rb	/^  def empty?$/;"	f	class:Square
+explorable?	solver.rb	/^  def explorable?(pos)$/;"	f	class:Solver
+explore!	solver.rb	/^  def explore!(pos)$/;"	f	class:Solver
+explored_squares	solver.rb	/^  def explored_squares$/;"	f	class:Solver
 find_pos	maze.rb	/^  def find_pos(type)$/;"	f
 finish?	square.rb	/^  def finish?$/;"	f	class:Square
-impossible?	solver.rb	/^  def impossible?$/;"	f
-initialize	direction.rb	/^  def initialize(dir)$/;"	f	class:Direction
+generate_path	solver.rb	/^  def generate_path$/;"	f	class:Solver
 initialize	maze.rb	/^  def initialize(grid = nil)$/;"	f	class:Maze
 initialize	path.rb	/^  def initialize(positions = nil)$/;"	f	class:Path
 initialize	position.rb	/^  def initialize(x, y)$/;"	f	class:Position
 initialize	solver.rb	/^  def initialize(maze)$/;"	f	class:Solver
 initialize	square.rb	/^  def initialize(content)$/;"	f	class:Square
+inspect	position.rb	/^  def inspect$/;"	f	class:Position
 left	position.rb	/^  def left$/;"	f	class:Position
 left!	position.rb	/^  def left!$/;"	f	class:Position
 mark	square.rb	/^  def mark$/;"	f	class:Square
-mark!	solver.rb	/^  def mark!(pos)$/;"	f
+mark!	solver.rb	/^  def mark!(pos)$/;"	f	class:Solver
 mark!	square.rb	/^  def mark!$/;"	f	class:Square
-mark_from_path	solver.rb	/^  def mark_from_path$/;"	f
+mark_path!	solver.rb	/^  def mark_path!$/;"	f	class:Solver
 marked?	square.rb	/^  def marked?$/;"	f	class:Square
 move	position.rb	/^  def move(direction)$/;"	f	class:Position
-move	solver.rb	/^  def move(dir)$/;"	f
-move_forward!	solver.rb	/^  def move_forward!$/;"	f
 new_square	spec/solver_spec.rb	/^def new_square(content)$/;"	f
-oriented?	solver.rb	/^  def oriented?$/;"	f
 out_of_bounds?	maze.rb	/^  def out_of_bounds?(pos)$/;"	f	class:Maze
-over?	solver.rb	/^  def over?$/;"	f
+parrent	solver.rb	/^  def parrent(pos)$/;"	f	class:Solver
 print	maze.rb	/^  def print$/;"	f	class:Maze
-print	solver.rb	/^  def print$/;"	f
+print	solver.rb	/^  def print$/;"	f	class:Solver
 print	square.rb	/^  def print$/;"	f	class:Square
 print_row	maze.rb	/^  def print_row(row)$/;"	f	class:Maze
 print_with_marks	maze.rb	/^  def print_with_marks(row)$/;"	f	class:Maze
+proccess	solver.rb	/^  def proccess(pos)$/;"	f	class:Solver
 read_file	maze.rb	/^  def read_file(file)$/;"	f
 read_text	maze.rb	/^  def read_text(file)$/;"	f	class:Maze
 redundant?	path.rb	/^  def redundant?(pos)$/;"	f	class:Path
 remove_redundancies	path.rb	/^  def remove_redundancies$/;"	f	class:Path
 remove_redundancies!	path.rb	/^  def remove_redundancies!$/;"	f	class:Path
 reset_marks!	maze.rb	/^  def reset_marks!$/;"	f	class:Maze
+reverse!	path.rb	/^  def reverse!$/;"	f	class:Path
 right	position.rb	/^  def right$/;"	f	class:Position
 right!	position.rb	/^  def right!$/;"	f	class:Position
-solve	solver.rb	/^  def solve$/;"	f	class:Solver
+set_end	solver.rb	/^  def set_end(pos)$/;"	f	class:Solver
+solve!	solver.rb	/^  def solve!$/;"	f	class:Solver
 square	maze.rb	/^  def square(pos)$/;"	f	class:Maze
 start	maze.rb	/^  def start$/;"	f	class:Maze
 start?	square.rb	/^  def start?$/;"	f	class:Square
-step	solver.rb	/^  def step$/;"	f
 text_to_grid	maze.rb	/^  def text_to_grid(text)$/;"	f	class:Maze
-to_my	solver.rb	/^  def to_my(dir)$/;"	f
 to_positions	path.rb	/^  def to_positions(list)$/;"	f	class:Path
 to_s	maze.rb	/^  def to_s$/;"	f	class:Maze
 to_s	path.rb	/^  def to_s$/;"	f	class:Path
+to_s	position.rb	/^  def to_s$/;"	f	class:Position
 to_s	square.rb	/^  def to_s$/;"	f	class:Square
-to_the	solver.rb	/^  def to_the(dir)$/;"	f
-turn	direction.rb	/^  def turn(turn)$/;"	f	class:Direction
-turn_right!	direction.rb	/^  def turn_right!$/;"	f	class:Direction
-turn_right!	solver.rb	/^  def turn_right!$/;"	f
 unmark	square.rb	/^  def unmark$/;"	f	class:Square
 unmark!	square.rb	/^  def unmark!$/;"	f	class:Square
 up	position.rb	/^  def up$/;"	f	class:Position
 up!	position.rb	/^  def up!$/;"	f	class:Position
+update_history	solver.rb	/^  def update_history(explorer)$/;"	f	class:Solver
+validate	maze.rb	/^  def validate$/;"	f	class:Maze
 wall?	square.rb	/^  def wall?$/;"	f	class:Square
-won?	solver.rb	/^  def won?$/;"	f
 x_bound	maze.rb	/^  def x_bound$/;"	f	class:Maze
 y_bound	maze.rb	/^  def y_bound$/;"	f	class:Maze
