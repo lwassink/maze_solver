@@ -6,8 +6,6 @@
 #
 
 
-require_relative 'direction'
-
 class Position
   attr_reader :x
   attr_reader :y
@@ -18,7 +16,6 @@ class Position
   end
 
   def move(direction)
-    direction = direction.to_sym
     if [:up, :down, :right, :left].include? direction
       self.send(direction)
     else

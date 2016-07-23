@@ -8,7 +8,6 @@
 
 require_relative 'maze'
 require_relative 'path'
-require_relative 'direction'
 
 class Solver
   attr_reader :maze
