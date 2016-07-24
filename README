@@ -1,0 +1,33 @@
+: Maze Solver
+:
+: Copyright (C) 2016 Luke Wassink <lwassink@gmail.com>
+:
+: Distributed under terms of the MIT license.
+=============================================
+
+solve_maze.rb is a program that solves mazes.
+To run it, run
+
+  ./solve_maze.rb <file_name>
+
+where <file_name> is the name of the text file that contains a maze.
+Several sample mazes are included in the mazes folder.
+When run as above, solve_mazes will simply print out the solution.
+To watch the maze being solved, you can use the -t tag, which takes a numerical argument.
+The argument represents the number of seconds to pause between each step of maze solving.
+To watch the App Academy provided example, run
+
+  ./solve_maze.rb mazes/aA_maze.txt -t 0.5
+
+You can also use the -h flag for command line help.
+
+The solver is fairly robust.
+It can detect improperly formatted maze files, and it can tell if a maze is impossible to solve.
+As an example, maze4.txt is unsolvable.
+
+The solver is only very slightly optimized.
+It will never walk over the same square twice, but otherwise the solution path it finds can be quite inefficient.
+
+I have also included a suite of rspec tests in the spec folder.
+They should test all the public methods of the classes used by solve_maze.
+
