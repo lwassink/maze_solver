@@ -39,16 +39,16 @@ describe Path do
     end
   end
 
-  describe "#remove_redundancies" do
+  describe "#remove_redundancies!" do
     context "given a path with redundancies" do
       it "removes the redundancies" do
-        expect(@redundant_path.remove_redundancies).to eq(@non_redundant_path)
+        expect(@redundant_path.remove_redundancies!).to eq(@non_redundant_path)
       end
     end
 
     context "given a path without redundancies" do
       it "does nothing" do
-        expect(@non_redundant_path.remove_redundancies).to eq(@non_redundant_path)
+        expect(@non_redundant_path.remove_redundancies!).to eq(@non_redundant_path)
       end
     end
   end

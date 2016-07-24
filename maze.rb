@@ -95,7 +95,9 @@ class Maze
 
   def find_pos(type)
     grid.each_with_index do |row, y|
-      row.each_with_index { |square, x| return Position.new(x, y) if square.send(type) }
+      row.each_with_index do |square, x|
+        return Position.new(x, y) if square.send(type)
+      end
     end
 
     raise "A position of type #{type} could not be found"
@@ -108,7 +110,7 @@ class Maze
   def validate_characters
     contents = grid.flatten.map(&:content)
     unless (contents - ['E', ' ', '*', 'S']).empty?
-      raise MazeError, "Invalid maze characters."
+      raise MazeError, "A maze file may only contain the characters 'E', '*', 'S', ' '"
     end
   end
 

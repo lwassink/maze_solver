@@ -105,7 +105,7 @@ class Solver
       @path << pos
       pos = parrent(pos)
     end
-    @path.reverse!
+    @path.remove_redundancies!.reverse!
   end
 
   def parrent(pos)
@@ -123,7 +123,7 @@ class Solver
   end
 
   def unsolvable
-    "This maze cannot be solved\n#{maze.print}"
+    "\nThis maze cannot be solved\n\n#{maze.print}\n\n"
   end
 
   Explorer = Struct.new(:pos, :parrent)
@@ -131,7 +131,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   maze = Maze.new
-  maze.read_text('aA_maze.txt')
+  maze.read_text('mazes/aA_maze.txt')
   solver = Solver.new(maze)
   solver.solve!
   solver.conclude(0.5)

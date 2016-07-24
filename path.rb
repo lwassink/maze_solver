@@ -19,9 +19,9 @@ class Path
     @positions << pos
   end
 
-  def remove_redundancies
-    new = self.dup
-    new.remove_redundancies!
+  def remove_redundancies!
+    each { |pos| collapse(pos) if redundant?(pos) }
+    self
   end
 
   def reverse!
@@ -58,13 +58,6 @@ class Path
     first = occurrences.first[1]
     last = occurrences.last[1]
     @positions = @positions[0...first] + @positions[last..-1]
-  end
-
-  protected
-
-  def remove_redundancies!
-    each { |pos| collapse(pos) if redundant?(pos) }
-    self
   end
 end
 

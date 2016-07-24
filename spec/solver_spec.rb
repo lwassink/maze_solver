@@ -23,6 +23,10 @@ describe Solver do
     line_grid = [[f,e.dup,s]]
     line_maze = Maze.new(line_grid)
     @line_solver = Solver.new(line_maze)
+
+    impossible_grid = [[s, w, f]]
+    impossible_maze = Maze.new(impossible_grid)
+    @impossible_solver = Solver.new(impossible_maze)
   end
 
   describe "#new" do
@@ -40,6 +44,11 @@ describe Solver do
     it "#solves a maze with blank edges" do
       @line_solver.solve!
       expect(@line_solver.finish).to eq(Position.new(0,0))
+    end
+
+    it "#knows an impossible maze is impossible" do
+      @impossible_solver.solve!
+      expect(@impossible_solver.finish).to be_falsey
     end
   end
 end
