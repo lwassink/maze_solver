@@ -19,7 +19,7 @@ To watch the App Academy provided example, run
 
   ./solve_maze.rb mazes/aA_maze.txt -t 0.5
 
-You can also use the -h flag for command line help.
+You can also use the -h flag for command-line help.
 
 The solver is fairly robust.
 It can detect improperly formatted maze files, and it can tell if a maze is impossible to solve.
