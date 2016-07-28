@@ -129,11 +129,3 @@ class Solver
   Explorer = Struct.new(:pos, :parrent)
 end
 
-if __FILE__ == $PROGRAM_NAME
-  maze = Maze.new
-  maze.read_text('mazes/aA_maze.txt')
-  solver = Solver.new(maze)
-  solver.solve!
-  solver.conclude(0.5)
-end
-
