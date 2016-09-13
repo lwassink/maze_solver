@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!jusr/bin/ruby
 #
 # Copyright (C) 2016 Luke Wassink <lwassink@gmail.com>
 #
